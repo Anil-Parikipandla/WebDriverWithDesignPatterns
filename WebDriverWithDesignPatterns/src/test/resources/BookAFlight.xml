@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="UnitTestsSuite" verbose="1" >
+	<test name="UserCanBookAFlight">
+		<classes>
+			<class name="com.epam.tests.BookAFlight" />
+		</classes>
+	</test>
+</suite>
