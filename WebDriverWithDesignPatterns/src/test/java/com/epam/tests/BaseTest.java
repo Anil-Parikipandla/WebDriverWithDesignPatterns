@@ -1,14 +1,7 @@
 package com.epam.tests;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-import org.apache.commons.io.FileUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import com.epam.listeners.CustomListeners;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -19,6 +12,7 @@ import org.testng.annotations.Listeners;
 import com.epam.drivers.EnhancedDriver;
 import com.epam.pages.FlightSearchResultsPage;
 import com.epam.pages.HomePage;
+import com.epam.utils.Logger;
 
 @Listeners(CustomListeners.class)
 public class BaseTest {
@@ -38,9 +32,9 @@ public class BaseTest {
 	protected static final String EXPECTED_FIRST_RETURN_FLIGHT_PRICES = "[37,216,57,586,171,979]";
 
 	protected static WebDriver driver;
+	protected static WebDriver originalDriver;
 	protected HomePage Homepage;
 	protected FlightSearchResultsPage flight_Search_Results_Page;
-	protected Logger log = LogManager.getLogger();
 	
 	
 		@BeforeClass(description = "Start browser")
@@ -50,7 +44,9 @@ public class BaseTest {
 		if (null == driver) {
 			System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
 			DesiredCapabilities capabilities_chrome = DesiredCapabilities.chrome();
-			driver = new EnhancedDriver(new ChromeDriver(capabilities_chrome));
+			originalDriver = new ChromeDriver(capabilities_chrome);
+			driver = new EnhancedDriver(originalDriver);
+			Logger.printLogAs().info("Opened Decorated Browser");
 		}
 		return driver;
 
@@ -60,9 +56,9 @@ public class BaseTest {
 	public void add_Implicit_Wait() {
 		// set a certain implicit wait timeout
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
 		// Maximize browser window
 		driver.manage().window().maximize();
+		Logger.printLogAs().trace("Maximizing the Browser.");
 	}
 
 	@BeforeClass(dependsOnMethods = "add_Implicit_Wait", description = "create and return Homepage")
@@ -77,6 +73,7 @@ public class BaseTest {
 			driver.close();
 			driver.quit();
 			driver = null;
+			Logger.printLogAs().info("Browser Closed.");
 		}
 	}
 	
@@ -86,6 +83,10 @@ public class BaseTest {
 	
 	public static WebDriver getDriver(){
 		return driver;
+	}
+	
+	public static WebDriver originalDriver(){
+		return originalDriver;
 	}
 
 }

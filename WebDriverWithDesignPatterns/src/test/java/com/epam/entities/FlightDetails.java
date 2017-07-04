@@ -1,5 +1,7 @@
 package com.epam.entities;
 
+import com.epam.utils.Logger;
+
 public class FlightDetails {
 	private String Origin;
 	private String Destination;
@@ -35,61 +37,73 @@ public class FlightDetails {
 	
 	public FlightDetails withOrigin(String origin){
 		setOrigin(origin);
+		Logger.printLogAs().trace("Setting the Origin City/Country");
 		return this;
 	}
 	
 	public FlightDetails withDestination(String destination){
 		setDestination(destination);
+		Logger.printLogAs().trace("Setting the Destination City/Country");
 		return this;
 	}
 	
 	public FlightDetails withDepartureDate(String departureDate){
 		setDepartureDate(departureDate);
+		Logger.printLogAs().trace("Setting the Departure Date");
 		return this;
 	}
 	
 	public FlightDetails withRetrunDate(String returnDate){
 		setReturnDate(returnDate);
+		Logger.printLogAs().trace("Setting the Return Date");
 		return this;
 	}
 	
 	public FlightDetails withNoOfAdults(String adults){
 		setAdults(adults);
+		Logger.printLogAs().trace("Setting Number of Adults");
 		return this;
 	}
 	
 	public FlightDetails withNoOFChildren(int children){
 		setChildren(children);
+		Logger.printLogAs().trace("Setting Number of children");
 		return this;
 	}
 	
 	public FlightDetails withresultPageHeader(String header){
 		setResultsPageHeader(header);
+		Logger.printLogAs().trace("Setting the Expected pageHeader");
 		return this;
 	}
 	
 	public FlightDetails withConnectionIn(String connectioIn){
 		setConnectionIn(connectioIn);
+		Logger.printLogAs().trace("Setting the ConnectionIn value");
 		return this;
 	}
 	
 	public FlightDetails withDepartingDateInResults(String departingDate){
 		setDepartingDateInResults(departingDate);
+		Logger.printLogAs().trace("Setting the departing Date");
 		return this;
 	}
 	
 	public FlightDetails withReturningDateInResults(String returningDate){
 		setReturningDateInResults(returningDate);
+		Logger.printLogAs().trace("Setting the returning Date");
 		return this;
 	}
 	
 	public FlightDetails withFlightOutboundPrices(String pricesAsString){
 		setFlightOutboundPrices(pricesAsString);
+		Logger.printLogAs().trace("Setting the First Outbound Flight Prices as String");
 		return this;
 	}
 	
 	public FlightDetails withFlightRetunrPrices(String pricesAsString){
 		setFlightReturnPrices(pricesAsString);
+		Logger.printLogAs().trace("Setting the First Return Flight prices as String");
 		return this;
 	}
 	

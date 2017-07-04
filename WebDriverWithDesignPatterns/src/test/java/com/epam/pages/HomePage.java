@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 import com.epam.pages.FlightSearchResultsPage;
 import com.epam.utils.DatePicker;
+import com.epam.utils.Logger;
 import com.epam.waits.WaitforElement;
 
 public class HomePage extends BasePage{
@@ -53,6 +54,7 @@ public class HomePage extends BasePage{
 	
 	public void open_Flight_Booking_Window(){
 		book_A_FlightBtn.click();
+		Logger.printLogAs().info("Clicked on the Book A Flight Button.");
 	}
 
 	public void enter_Origin_And_Destination(String origin, String destination){
@@ -60,9 +62,11 @@ public class HomePage extends BasePage{
 		departure_Airport.clear();
 		departure_Airport.sendKeys(origin);
 		departure_Airport.sendKeys(Keys.ENTER);
+		Logger.printLogAs().info("Entered the Origin city/Country as "+origin);
 		WaitforElement.waitforElement(webDriver, arrival_Airport);
 		arrival_Airport.sendKeys(destination);
 		arrival_Airport.sendKeys(Keys.ENTER);
+		Logger.printLogAs().info("Entered the Destination city/Country as "+destination);
 	}
 
 	public void select_Departure_and_returnDate(String departureDate, String returnDate){
@@ -79,13 +83,16 @@ public class HomePage extends BasePage{
 	
 	public void add_Children(int children){
 		add_children_Link.click();
+		Logger.printLogAs().info("clicked on Add Children");
 		children_Link.click();
 		get_no_of_children(webDriver, children);
 		no_Of_Children.click();
+		Logger.printLogAs().info("Selected Number of children as "+children);
 	}
 	
 	public FlightSearchResultsPage search_for_flights(){
 		find_Flights_Button.click();
+		Logger.printLogAs().info("Clicked on Search for Flights button");
 		return new FlightSearchResultsPage(webDriver);
 	}
 	

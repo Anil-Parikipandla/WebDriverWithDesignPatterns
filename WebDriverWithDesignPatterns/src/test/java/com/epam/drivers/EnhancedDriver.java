@@ -2,9 +2,7 @@ package com.epam.drivers;
 
 import java.util.List;
 import java.util.Set;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import com.epam.utils.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,14 +10,14 @@ import org.openqa.selenium.internal.WrapsDriver;
 
 public class EnhancedDriver implements WebDriver,WrapsDriver{
 	protected WebDriver driver;
-	private Logger log = LogManager.getRootLogger();
 	
 	public EnhancedDriver(WebDriver driver) {
-		this.driver = driver;
+		this.driver = driver; 
+		Logger.printLogAs().trace("Creating Decorated Driver.");
 	}
 	
 	public WebDriver getWrappedDriver() {
-		return driver;
+		return this;
 	}
 
 	public void get(String url) {
@@ -35,12 +33,12 @@ public class EnhancedDriver implements WebDriver,WrapsDriver{
 	}
 
 	public List<WebElement> findElements(By by) {
-		log.trace("Searching for the "+by+" element.");
+		Logger.printLogAs().trace("Searching for the "+by+" element.");
 		return driver.findElements(by);
 	}
 
 	public WebElement findElement(By by) {
-		log.trace("Searching for the "+by+"element.");
+		Logger.printLogAs().trace("Searching for the "+by+"element.");
 		return driver.findElement(by);
 	}
 

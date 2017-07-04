@@ -58,7 +58,7 @@ public class FlightSearchResultsPage extends BasePage{
 		for(int i=0;i<first_Outbound_Flight_Prices.size();i++){
 			FirstOutboudPrices.add(first_Outbound_Flight_Prices.get(i).getText());
 		}
-		System.out.println("Various Prices Options for the first Outbound flight are: "+FirstOutboudPrices);
+//		System.out.println("Various Prices Options for the first Outbound flight are: "+FirstOutboudPrices);
 		return FirstOutboudPrices;
 	}
 	
@@ -66,7 +66,7 @@ public class FlightSearchResultsPage extends BasePage{
 		for(int i=0;i<first_Return_Flight_Prices.size();i++){
 			FirstReturnPrices.add(first_Return_Flight_Prices.get(i).getText());
 		}
-		System.out.println("Various Prices Options for the first Return flight are: "+FirstReturnPrices);
+//		System.out.println("Various Prices Options for the first Return flight are: "+FirstReturnPrices);
 		return FirstReturnPrices;
 	}
 	

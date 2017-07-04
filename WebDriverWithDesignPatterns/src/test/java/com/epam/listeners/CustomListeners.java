@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.IInvokedMethod;
@@ -15,11 +13,11 @@ import org.testng.ISuiteListener;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-
 import com.epam.tests.BaseTest;
+import com.epam.utils.Logger;
 
 public class CustomListeners implements ITestListener,ISuiteListener,IInvokedMethodListener{
-	private Logger log = LogManager.getRootLogger();
+	
 	@Override
 	public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
 		// TODO Auto-generated method stub
@@ -34,29 +32,29 @@ public class CustomListeners implements ITestListener,ISuiteListener,IInvokedMet
 
 	@Override
 	public void onStart(ISuite suite) {
-		log.info("Started executing the Suite:"+suite.getName());
+		Logger.printLogAs().info("Started executing the Suite:"+suite.getName());
 		
 	}
 
 	@Override
 	public void onFinish(ISuite suite) {
-		log.info("Completed execution of the Suite: " +suite.getName());
+		Logger.printLogAs().info("Completed execution of the Suite: " +suite.getName());
 	}
 
 	@Override
 	public void onTestStart(ITestResult result) {
-		log.info("Started executing the Test: "+result.getName());
+		Logger.printLogAs().info("Started executing the Test: "+result.getName());
 	}
 
 	@Override
 	public void onTestSuccess(ITestResult result) {
-		log.info("Succesfully completed the Test: "+result.getName());
+		Logger.printLogAs().info("Succesfully completed the Test: "+result.getName());
 	}
 
 	@Override
 	public void onTestFailure(ITestResult result) {
-		log.info("Failed while exeuting the Test: "+ result.getName());
-		log.info("Taking Screenshot");
+		Logger.printLogAs().info("Failed while exeuting the Test: "+ result.getName());
+		Logger.printLogAs().info("Taking Screenshot");
 		takeScreenshot(result.getName());
 	}
 
@@ -85,12 +83,13 @@ public class CustomListeners implements ITestListener,ISuiteListener,IInvokedMet
 	}
 	
 	public void takeScreenshot(String methodName) {
-		File screenCapture = ((TakesScreenshot)BaseTest.getDriver()).getScreenshotAs(OutputType.FILE);
+//		EnhancedDriver driver = new EnhancedDriver(BaseTest.getDriver());
+		File screenCapture = ((TakesScreenshot)BaseTest.originalDriver()).getScreenshotAs(OutputType.FILE);
 		try {
 			FileUtils.copyFile(screenCapture, new File(".//target/screenshots/" + methodName + "screenshot.png"));
-			log.info("Screenshot Captured!");
+			Logger.printLogAs().info("Screenshot Captured!");
 		} catch (IOException e) {
-			log.info("Failed to save screenshot: " + e.getLocalizedMessage());
+			Logger.printLogAs().info("Failed to save screenshot: " + e.getLocalizedMessage());
 		}
 	}
 
